@@ -1,0 +1,302 @@
+{
+    "elements": [
+        { 
+            "type": "Label",
+            "caption": "Insert the IP-address of the Pontos Base:"
+        },
+        { 
+            "type": "ValidationTextBox", 
+            "name": "IPAddress", 
+            "caption": "IP Address" 
+        },
+        {
+            "type": "NumberSpinner",
+            "name": "UpdateDataInterval",
+            "minimum": 0,
+            "caption": "Intervall in sec. , 0 to deactive automatic"
+        },
+        { 
+            "type": "Label",
+            "name": "LabelUpdate",
+            "caption": "Timer is deactivated, please reload Data manually!",
+            "visible": false
+        },
+        {
+            "type": "ExpansionPanel",
+            "caption": "Choose which default variable you want to create:",
+            "expanded": true,
+            "name": "DefVarPanel",
+            "items": [
+                { 
+                    "type": "Label",
+                    "name": "LabelProfile",
+                    "caption": "informations about Profiles ",
+                    "visible": true
+                },
+        
+                {
+                    "type": "CheckBox",
+                    "caption": "active profile name",
+                    "name": "getPNbool"
+                 },
+                 {
+                    "type": "CheckBox",
+                    "caption": "water volume",
+                    "name": "getPVbool"
+                 },
+                 {
+                    "type": "CheckBox",
+                    "caption": "permanent water withdrawal",
+                    "name": "getPTbool"
+                 },
+                {
+                    "type": "CheckBox",
+                    "caption": "water flow l/h",
+                    "name": "getPFbool"
+                 },
+                 {
+                    "type": "CheckBox",
+                    "caption": "micro leak detection",
+                    "name": "getPMbool"
+                 },
+                 {
+                    "type": "CheckBox",
+                    "caption": "buzzer",
+                    "name": "getPBbool"
+                 },
+                 { 
+                    "type": "Label",
+                    "name": "LabelValve",
+                    "caption": "informations about Valvestate ",
+                    "visible": true
+                },
+                {
+                    "type": "CheckBox",
+                    "caption": "Valvestate",
+                    "name": "getVLVbool"
+                },
+                {
+                    "type": "CheckBox",
+                    "caption": "total volume in liters",
+                    "name": "getVOLbool"
+                },                 
+                {
+                    "type": "CheckBox",
+                    "caption": "battery voltage",
+                    "name": "getBATbool"
+                },
+                {
+                    "type": "CheckBox",
+                    "caption": "voltage of power adaptor",
+                    "name": "getNETbool"
+                },
+                {
+                    "type": "CheckBox",
+                    "caption": "water conductivity",
+                    "name": "getCNDbool",
+                    "onChange": "HGPB_ChangeFormField($id, \"getCND2bool\", \"enabled\", true);"
+                },
+                {
+                    "type": "CheckBox",
+                    "caption": "water hardness level",
+                    "name": "getCND2bool",
+                    "enabled": false,
+                    "value": false,
+                    "visible": false
+                },          
+                {
+                    "type": "CheckBox",
+                    "caption": "water pressure",
+                    "name": "getBARbool"
+                },
+                
+                { 
+                    "type": "Label",
+                    "caption": "switchable actions",
+                    "name": "switchableLabel"
+                },
+                {
+                    "type": "CheckBox",
+                    "caption": "lock or unlock valve",
+                    "name": "getLOCKbool"
+                },
+                {
+                    "type": "CheckBox",
+                    "caption": "switch active profile",
+                    "name": "getPROFILESWbool"
+                },
+                {
+                    "type": "CheckBox",
+                    "caption": "clear Alarm",
+                    "name": "getALASWbool"
+                }
+            ]
+        },
+        {
+            "type": "ExpansionPanel",
+            "caption": "Choose which optional variables you want to create:",
+            "visible": true,
+            "name": "VarPanel",
+            "items": [
+                {
+                    "type": "Label",
+                    "caption": "Sytemvariablen"
+                 },
+                {
+                    "type": "CheckBox",
+                    "caption": "Serial-no.",
+                    "name": "getSRNbool"
+                 },
+                {
+                    "type": "CheckBox",
+                    "caption": "Firmware Version",
+                    "name": "getVERbool"
+                 },
+                {
+                    "type": "CheckBox",
+                    "caption": "Type",
+                    "name": "getTYPbool"
+                 },
+                {
+                    "type": "CheckBox",
+                    "caption": "Code-no.",
+                    "name": "getCNObool"
+                 },
+                {
+                    "type": "CheckBox",
+                    "caption": "MAC Address",
+                    "name": "getMACbool"
+                 },
+                 {
+                    "type": "Label",
+                    "caption": "information variablen"
+                 },
+                 {
+                    "type": "CheckBox",
+                    "caption": "last update",
+                    "name": "getRTCbool"
+                 },
+                 {
+                    "type": "CheckBox",
+                    "caption": "current alarm",
+                    "name": "getALAbool"
+                 },
+                 {
+                    "type": "CheckBox",
+                    "caption": "Wifi connection state",
+                    "name": "getWFSbool"
+                 },
+                {
+                    "type": "CheckBox",
+                    "caption": "Wifi connection strength RSSI",
+                    "name": "getWFRbool"
+                 },
+                 {
+                    "type": "CheckBox",
+                    "caption": "Self Llearning procedure",
+                    "name": "getSLPbool"
+                 },
+                 {
+                    "type": "Label",
+                    "caption": "Unknown variables",
+                    "visible": true
+                 },
+                 {
+                    "type": "CheckBox",
+                    "caption": "getPR",
+                    "name": "getPRbool"
+                 },
+
+                {
+                    "type": "CheckBox",
+                    "caption": "getTMP",
+                    "name": "getTMPbool"
+                 },
+                {
+                    "type": "CheckBox",
+                    "caption": "getCEL",
+                    "name": "getCELbool"
+                 },
+                {
+                    "type": "CheckBox",
+                    "caption": "getNPS",
+                    "name": "getNPSbool"
+                 },
+
+                {
+                    "type": "CheckBox",
+                    "caption": "getALM",
+                    "name": "getALMbool"
+                 },
+                {
+                    "type": "CheckBox",
+                    "caption": "getDMA",
+                    "name": "getDMAbool"
+                 },
+                {
+                    "type": "CheckBox",
+                    "caption": "getAVO",
+                    "name": "getAVObool"
+                 },
+               
+                {
+                    "type": "CheckBox",
+                    "caption": "getBUZ",
+                    "name": "getBUZbool"
+                 },
+                {
+                    "type": "CheckBox",
+                    "caption": "getDBD",
+                    "name": "getDBDbool"
+                 },
+                
+                {
+                    "type": "CheckBox",
+                    "caption": "getIDS",
+                    "name": "getIDSbool"
+                 },
+                {
+                    "type": "CheckBox",
+                    "caption": "getTMZ",
+                    "name": "getTMZbool"
+                }                
+                ]
+            }
+
+    ],
+    "actions": [       
+        {
+            "type": "Button",
+            "caption": "update manual",
+            "name": "UpdateData",
+            "onClick": "HGPB_UpdateData($id);",
+            "visible": true
+        },
+        {
+            "type": "Button",
+            "caption": "clear Alarm",
+            "name": "ClearAlarm",
+            "onClick": "IPS_RequestAction($id, 'ClearAlarmFromForm', '');",
+            "visible": false
+        },
+        {
+            "type": "Button",
+            "caption": "Check Connection",
+            "name": "CheckConnection",
+            "onClick": "HGPB_CheckConnection($id);",
+            "visible": true
+        } 
+    ],
+    "status": [
+        {  
+            "code": 100, 
+            "icon": "active", 
+            "caption": "instance is active" 
+        },
+        {  
+            "code": 104, 
+            "icon": "inactive", 
+            "caption": "timer deactivated!" 
+        }
+    ]
+}

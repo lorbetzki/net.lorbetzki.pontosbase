@@ -1,0 +1,12 @@
+{
+    "id": "{A6F89154-9E19-5EDA-B730-7E032D2FD21F}",
+    "name": "PontosBase V2",
+    "type": 3,
+    "vendor": "hansgrohe",
+    "aliases": [],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "PB",
+    "url": "https://github.com/lorbetzki/net.lorbetzki.pontosbase"
+}
