@@ -7,7 +7,7 @@
         { 
             "type": "ValidationTextBox", 
             "name": "IPAddress", 
-            "caption": "IP Address" 
+            "caption": "IP Address or Hostname" 
         },
         {
             "type": "NumberSpinner",
@@ -30,7 +30,7 @@
                 { 
                     "type": "Label",
                     "name": "LabelProfile",
-                    "caption": "informations about Profiles ",
+                    "caption": "Profileinformation",
                     "visible": true
                 },
         
@@ -41,33 +41,33 @@
                  },
                  {
                     "type": "CheckBox",
-                    "caption": "water volume",
+                    "caption": "water volume of active profile",
                     "name": "getPVbool"
                  },
                  {
                     "type": "CheckBox",
-                    "caption": "permanent water withdrawal",
+                    "caption": "permanent water withdrawal of active profile",
                     "name": "getPTbool"
                  },
                 {
                     "type": "CheckBox",
-                    "caption": "water flow l/h",
+                    "caption": "water flow l/h of active profile",
                     "name": "getPFbool"
                  },
                  {
                     "type": "CheckBox",
-                    "caption": "micro leak detection",
+                    "caption": "micro leak detection of active profile",
                     "name": "getPMbool"
                  },
                  {
                     "type": "CheckBox",
-                    "caption": "buzzer",
+                    "caption": "Active state of buzzer for active profile",
                     "name": "getPBbool"
                  },
                  { 
                     "type": "Label",
                     "name": "LabelValve",
-                    "caption": "informations about Valvestate ",
+                    "caption": "More interesting variables ",
                     "visible": true
                 },
                 {
@@ -93,16 +93,12 @@
                 {
                     "type": "CheckBox",
                     "caption": "water conductivity",
-                    "name": "getCNDbool",
-                    "onChange": "HGPB_ChangeFormField($id, \"getCND2bool\", \"enabled\", true);"
+                    "name": "getCNDbool"
                 },
                 {
                     "type": "CheckBox",
                     "caption": "water hardness level",
-                    "name": "getCND2bool",
-                    "enabled": false,
-                    "value": false,
-                    "visible": false
+                    "name": "getCND2bool"
                 },          
                 {
                     "type": "CheckBox",
@@ -129,7 +125,61 @@
                     "type": "CheckBox",
                     "caption": "clear Alarm",
                     "name": "getALASWbool"
-                }
+                },
+                {
+                    "type": "CheckBox",
+                    "caption": "set self learning procedure in days",
+                    "name": "getSLPSWbool"
+                },
+                {
+                    "type": "CheckBox",
+                    "caption": "set daylight saving mode ",
+                    "name": "getIDSSWbool"
+                },
+                {
+                    "type": "CheckBox",
+                    "caption": "set temporary deactivation for leakage detection time in sec.",
+                    "name": "getTMPSWbool"
+                },
+                {
+                    "type": "CheckBox",
+                    "caption": "current alarm",
+                    "name": "getALAbool"
+                 },
+                 {
+                    "type": "CheckBox",
+                    "caption": "Wifi connection state",
+                    "name": "getWFSbool"
+                 },
+                {
+                    "type": "CheckBox",
+                    "caption": "Wifi connection strength RSSI",
+                    "name": "getWFRbool"
+                 },
+                 {
+                    "type": "CheckBox",
+                    "caption": "Water Temperature",
+                    "name": "getCELbool"
+                 },
+                {
+                    "type": "CheckBox",
+                    "caption": "no pulse time of turbine in seconds",
+                    "name": "getNPSbool"
+                 },
+
+                {
+                    "type": "CheckBox",
+                    "caption": "volume of the current water consumption process in ml",
+                    "name": "getAVObool"
+                 },
+               
+                {
+                    "type": "CheckBox",
+                    "caption": "configured Micro Leakage test pressure drop in bar",
+                    "name": "getDBDbool"
+                 }               
+                
+                 
             ]
         },
         {
@@ -140,7 +190,7 @@
             "items": [
                 {
                     "type": "Label",
-                    "caption": "Sytemvariablen"
+                    "caption": "static variables"
                  },
                 {
                     "type": "CheckBox",
@@ -166,101 +216,8 @@
                     "type": "CheckBox",
                     "caption": "MAC Address",
                     "name": "getMACbool"
-                 },
-                 {
-                    "type": "Label",
-                    "caption": "information variablen"
-                 },
-                 {
-                    "type": "CheckBox",
-                    "caption": "last update",
-                    "name": "getRTCbool"
-                 },
-                 {
-                    "type": "CheckBox",
-                    "caption": "current alarm",
-                    "name": "getALAbool"
-                 },
-                 {
-                    "type": "CheckBox",
-                    "caption": "Wifi connection state",
-                    "name": "getWFSbool"
-                 },
-                {
-                    "type": "CheckBox",
-                    "caption": "Wifi connection strength RSSI",
-                    "name": "getWFRbool"
-                 },
-                 {
-                    "type": "CheckBox",
-                    "caption": "Self Llearning procedure",
-                    "name": "getSLPbool"
-                 },
-                 {
-                    "type": "Label",
-                    "caption": "Unknown variables",
-                    "visible": true
-                 },
-                 {
-                    "type": "CheckBox",
-                    "caption": "getPR",
-                    "name": "getPRbool"
-                 },
-
-                {
-                    "type": "CheckBox",
-                    "caption": "getTMP",
-                    "name": "getTMPbool"
-                 },
-                {
-                    "type": "CheckBox",
-                    "caption": "getCEL",
-                    "name": "getCELbool"
-                 },
-                {
-                    "type": "CheckBox",
-                    "caption": "getNPS",
-                    "name": "getNPSbool"
-                 },
-
-                {
-                    "type": "CheckBox",
-                    "caption": "getALM",
-                    "name": "getALMbool"
-                 },
-                {
-                    "type": "CheckBox",
-                    "caption": "getDMA",
-                    "name": "getDMAbool"
-                 },
-                {
-                    "type": "CheckBox",
-                    "caption": "getAVO",
-                    "name": "getAVObool"
-                 },
-               
-                {
-                    "type": "CheckBox",
-                    "caption": "getBUZ",
-                    "name": "getBUZbool"
-                 },
-                {
-                    "type": "CheckBox",
-                    "caption": "getDBD",
-                    "name": "getDBDbool"
-                 },
-                
-                {
-                    "type": "CheckBox",
-                    "caption": "getIDS",
-                    "name": "getIDSbool"
-                 },
-                {
-                    "type": "CheckBox",
-                    "caption": "getTMZ",
-                    "name": "getTMZbool"
-                }                
-                ]
+                 }
+                 ]
             }
 
     ],
@@ -269,7 +226,7 @@
             "type": "Button",
             "caption": "update manual",
             "name": "UpdateData",
-            "onClick": "HGPB_UpdateData($id);",
+            "onClick": "PB_UpdateData($id);",
             "visible": true
         },
         {
@@ -283,7 +240,7 @@
             "type": "Button",
             "caption": "Check Connection",
             "name": "CheckConnection",
-            "onClick": "HGPB_CheckConnection($id);",
+            "onClick": "PB_CheckConnection($id);",
             "visible": true
         } 
     ],
@@ -297,6 +254,16 @@
             "code": 104, 
             "icon": "inactive", 
             "caption": "timer deactivated!" 
+        },
+        {  
+            "code": 200, 
+            "icon": "error", 
+            "caption": "please enter Hostname or IP Address!" 
+        },
+        {  
+            "code": 201, 
+            "icon": "error", 
+            "caption": "please enter Hostname or IP Address of the device!" 
         }
     ]
 }
