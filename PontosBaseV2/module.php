@@ -374,6 +374,11 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 				{
 					$this->SetValue("getTMPSW", $Data['getTMP']);
 				}
+				if ($this->ReadPropertyBoolean('getLOCKbool') )
+				{
+					$this->SetValue("getLOCK", $Data['getVLV']);
+				}
+				
 				// check if User want to create Variable and if match with received Data, then set the value.
 
 				foreach ($Data as $key =>$value) 
