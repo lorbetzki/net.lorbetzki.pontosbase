@@ -84,32 +84,6 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			$this->RegisterPropertyInteger('getTMPSW', 0);
 			$this->RegisterPropertyBoolean('getTMPSWbool', false);
 
-			
-
-			$this->RegisterTimer('PB_UpdateData', 0, 'PB_UpdateData($_IPS[\'TARGET\']);');
-			$this->RegisterPropertyInteger('UpdateDataInterval', 60);
-		
-		}
-
-		public function Destroy()
-		{
-			//Never delete this line!
-			parent::Destroy();
-		}
-
-		public function ApplyChanges()
-		{
-			//Never delete this line!
-			parent::ApplyChanges();
-
-			$this->SetTimerInterval('PB_UpdateData', $this->ReadPropertyInteger('UpdateDataInterval') * 1000);
-
-			if ($this->ReadPropertyInteger('UpdateDataInterval') == 0){
-				$this->SetStatus(104);
-			} else {
-				$this->SetStatus(102);
-			}
-
 			// create Profile
 			if (!@IPS_VariableProfileExists("PontosBase.Profile"))
 			{
@@ -244,6 +218,31 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 				IPS_SetVariableProfileText ("PontosBase.SLP", "","");
 				IPS_SetVariableProfileValues("PontosBase.SLP", 0, 28, 1);
 			}
+				
+
+			$this->RegisterTimer('PB_UpdateData', 0, 'PB_UpdateData($_IPS[\'TARGET\']);');
+			$this->RegisterPropertyInteger('UpdateDataInterval', 60);
+		
+		}
+
+		public function Destroy()
+		{
+			//Never delete this line!
+			parent::Destroy();
+		}
+
+		public function ApplyChanges()
+		{
+			//Never delete this line!
+			parent::ApplyChanges();
+
+			$this->SetTimerInterval('PB_UpdateData', $this->ReadPropertyInteger('UpdateDataInterval') * 1000);
+
+			if ($this->ReadPropertyInteger('UpdateDataInterval') == 0){
+				$this->SetStatus(104);
+			} else {
+				$this->SetStatus(102);
+			}
 			
 			############################### 
 			// Sort 100-110 for profiles
@@ -258,8 +257,8 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			// sort of switchable action 120-130
 			$this->MaintainVariable('getALASW', $this->Translate('clear Alarm'),1, "PontosBase.clrAla",120, $this->ReadPropertyBoolean('getALASWbool') == true);
 			$this->MaintainVariable('getSLPSW', $this->Translate('set days for self learning procedure'),1, "PontosBase.SLP",121, $this->ReadPropertyBoolean('getSLPSWbool') == true);
-			$this->MaintainVariable('getIDSSW', $this->Translate('set state of Daylight saving mode'),1, "PontosBase.DSM",122, $this->ReadPropertyBoolean('getIDSSWbool') == true);
-			$this->MaintainVariable('getTMPSW', $this->Translate('set temporary deactivation for leakage detection in seconds'),1, "",123, $this->ReadPropertyBoolean('getTMPSWbool') == true);
+			$this->MaintainVariable('getIDSSW', $this->Translate('set state of daylight saving mode'),1, "PontosBase.DSM",122, $this->ReadPropertyBoolean('getIDSSWbool') == true);
+			$this->MaintainVariable('getTMPSW', $this->Translate('set temporary deactivation for leakage detection time in sec.'),1, "",123, $this->ReadPropertyBoolean('getTMPSWbool') == true);
 
 			//sort  for information 131-150
 			$this->MaintainVariable('getALA', $this->Translate('current alarm'),3, "PontosBase.Alarm",131, $this->ReadPropertyBoolean('getALAbool') == true);
@@ -275,7 +274,7 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			$this->MaintainVariable('getWFR', $this->Translate('Wifi connection strength (RSSI)'),1, "~Intensity.100",141, $this->ReadPropertyBoolean('getWFRbool') == true);
 
 			$this->MaintainVariable('getBAT', $this->Translate('battery voltage'),2, "~Volt",142, $this->ReadPropertyBoolean('getBATbool') == true);
-			$this->MaintainVariable('getNET', $this->Translate('voltage of power adapter'),2, "~Volt",143, $this->ReadPropertyBoolean('getNETbool') == true);
+			$this->MaintainVariable('getNET', $this->Translate('voltage of power adaptor'),2, "~Volt",143, $this->ReadPropertyBoolean('getNETbool') == true);
 
 			$this->MaintainVariable('getVLV', $this->Translate('Valvestate'),1, "PontosBase.Valve",144, $this->ReadPropertyBoolean('getVLVbool') == true);
 
@@ -288,40 +287,6 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			
 
 			$this->MaintainVariable('getLOCK', $this->Translate('lock or unlock valve'),1, "PontosBase.Valve",90, $this->ReadPropertyBoolean('getLOCKbool') == true);
-
-
-			######################## 
-			// check if user deactivate variable with own IPS Profiles and delete them
-
-			if  ( ((!$this->ReadPropertyBoolean('getVLVbool')) AND ((!$this->ReadPropertyBoolean('getLOCKbool')) AND (@IPS_VariableProfileExists("PontosBase.Valve")) )))
-			{
-				IPS_DeleteVariableProfile("PontosBase.Valve");
-			}
-
-			if  ( ((!$this->ReadPropertyBoolean('getAVObool')) AND (@IPS_VariableProfileExists("PontosBase.Mliter")) ))
-			{
-				IPS_DeleteVariableProfile("PontosBase.Mliter");
-			}
-			
-			if  ( ((!$this->ReadPropertyBoolean('getBARbool')) AND (@IPS_VariableProfileExists("PontosBase.Mbar")) ))
-			{
-				IPS_DeleteVariableProfile("PontosBase.Mbar");
-			}
-			
-			if  ( ((!$this->ReadPropertyBoolean('getVOLbool')) AND (@IPS_VariableProfileExists("PontosBase.Liter")) ))
-			{
-				IPS_DeleteVariableProfile("PontosBase.Liter");
-			}
-
-			if  ( ((!$this->ReadPropertyBoolean('getCNDbool')) AND (@IPS_VariableProfileExists("PontosBase.Conductivity")) ))
-			{
-				IPS_DeleteVariableProfile("PontosBase.Conductivity");
-			}
-
-			if  ( ((!$this->ReadPropertyBoolean('getCND2bool')) AND (@IPS_VariableProfileExists("PontosBase.Hardness")) ))
-			{
-				IPS_DeleteVariableProfile("PontosBase.Hardness");
-			}
 
 			if  ($this->ReadPropertyBoolean('getLOCKbool') )
 			{
@@ -349,8 +314,9 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 				$this->EnableAction('getTMPSW');
 			}			
 			########################
-
-			//$this->UpdateData();
+			if ($this->ReadPropertyInteger('UpdateDataInterval') >0){
+				$this->UpdateData();
+			}
 		}
 
 		public function GetConfigurationForm()
@@ -358,7 +324,7 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			$jsonForm = json_decode(file_get_contents(__DIR__ . "/form.json"), true);
 			
 			if ($this->Getstatus() == 104 ){
-				$jsonForm["elements"][4]["visible"] = true;
+				$jsonForm["elements"][3]["visible"] = true;
 			}
 
 			if (!$this->ReadPropertyString('IPAddress') )
@@ -378,7 +344,7 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 
 				$DataAll = $this->GetAllData();
 				$DataCND = $this->GetOneData("CND"); // water  conductivity level must be get separately
-				$DataSLP = $this->GetOneData("SLP"); //Self lerning program
+				$DataSLP = $this->GetOneData("SLP"); // Self learning program
 
 				if (!is_array($DataAll) || !is_array($DataCND) || !is_array($DataSLP)) {
 					$this->LogMessage($this->Translate('problems to get data, data is not an array, try again later'), KL_ERROR);

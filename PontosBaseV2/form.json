@@ -67,7 +67,7 @@
                  { 
                     "type": "Label",
                     "name": "LabelValve",
-                    "caption": "More interesting variables ",
+                    "caption": "More interesting variables",
                     "visible": true
                 },
                 {
@@ -104,7 +104,43 @@
                     "type": "CheckBox",
                     "caption": "water pressure",
                     "name": "getBARbool"
-                },
+                },{
+                    "type": "CheckBox",
+                    "caption": "current alarm",
+                    "name": "getALAbool"
+                 },
+                 {
+                    "type": "CheckBox",
+                    "caption": "Wifi connection state",
+                    "name": "getWFSbool"
+                 },
+                {
+                    "type": "CheckBox",
+                    "caption": "Wifi connection strength RSSI",
+                    "name": "getWFRbool"
+                 },
+                 {
+                    "type": "CheckBox",
+                    "caption": "water temperature",
+                    "name": "getCELbool"
+                 },
+                {
+                    "type": "CheckBox",
+                    "caption": "no pulse time of turbine in seconds",
+                    "name": "getNPSbool"
+                 },
+
+                {
+                    "type": "CheckBox",
+                    "caption": "volume of the current water consumption process in ml",
+                    "name": "getAVObool"
+                 },
+               
+                {
+                    "type": "CheckBox",
+                    "caption": "configured Micro Leakage test pressure drop in bar",
+                    "name": "getDBDbool"
+                 },               
                 
                 { 
                     "type": "Label",
@@ -128,58 +164,19 @@
                 },
                 {
                     "type": "CheckBox",
-                    "caption": "set self learning procedure in days",
+                    "caption": "set days for self learning procedure",
                     "name": "getSLPSWbool"
                 },
                 {
                     "type": "CheckBox",
-                    "caption": "set daylight saving mode ",
+                    "caption": "set daylight saving mode",
                     "name": "getIDSSWbool"
                 },
                 {
                     "type": "CheckBox",
                     "caption": "set temporary deactivation for leakage detection time in sec.",
                     "name": "getTMPSWbool"
-                },
-                {
-                    "type": "CheckBox",
-                    "caption": "current alarm",
-                    "name": "getALAbool"
-                 },
-                 {
-                    "type": "CheckBox",
-                    "caption": "Wifi connection state",
-                    "name": "getWFSbool"
-                 },
-                {
-                    "type": "CheckBox",
-                    "caption": "Wifi connection strength RSSI",
-                    "name": "getWFRbool"
-                 },
-                 {
-                    "type": "CheckBox",
-                    "caption": "Water Temperature",
-                    "name": "getCELbool"
-                 },
-                {
-                    "type": "CheckBox",
-                    "caption": "no pulse time of turbine in seconds",
-                    "name": "getNPSbool"
-                 },
-
-                {
-                    "type": "CheckBox",
-                    "caption": "volume of the current water consumption process in ml",
-                    "name": "getAVObool"
-                 },
-               
-                {
-                    "type": "CheckBox",
-                    "caption": "configured Micro Leakage test pressure drop in bar",
-                    "name": "getDBDbool"
-                 }               
-                
-                 
+                }    
             ]
         },
         {
