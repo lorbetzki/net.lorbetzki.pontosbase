@@ -257,8 +257,9 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			// sort of switchable action 120-130
 			$this->MaintainVariable('getALASW', $this->Translate('clear Alarm'),1, "PontosBase.clrAla",120, $this->ReadPropertyBoolean('getALASWbool') == true);
 			$this->MaintainVariable('getSLPSW', $this->Translate('set days for self learning procedure'),1, "PontosBase.SLP",121, $this->ReadPropertyBoolean('getSLPSWbool') == true);
-			$this->MaintainVariable('getIDSSW', $this->Translate('set state of daylight saving mode'),1, "PontosBase.DSM",122, $this->ReadPropertyBoolean('getIDSSWbool') == true);
+			$this->MaintainVariable('getIDSSW', $this->Translate('set daylight saving mode'),1, "PontosBase.DSM",122, $this->ReadPropertyBoolean('getIDSSWbool') == true);
 			$this->MaintainVariable('getTMPSW', $this->Translate('set temporary deactivation for leakage detection time in sec.'),1, "",123, $this->ReadPropertyBoolean('getTMPSWbool') == true);
+			$this->MaintainVariable('getLOCK', $this->Translate('lock or unlock valve'),1, "PontosBase.Valve",124, $this->ReadPropertyBoolean('getLOCKbool') == true);
 
 			//sort  for information 131-150
 			$this->MaintainVariable('getALA', $this->Translate('current alarm'),3, "PontosBase.Alarm",131, $this->ReadPropertyBoolean('getALAbool') == true);
@@ -275,8 +276,8 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 
 			$this->MaintainVariable('getBAT', $this->Translate('battery voltage'),2, "~Volt",142, $this->ReadPropertyBoolean('getBATbool') == true);
 			$this->MaintainVariable('getNET', $this->Translate('voltage of power adaptor'),2, "~Volt",143, $this->ReadPropertyBoolean('getNETbool') == true);
-
 			$this->MaintainVariable('getVLV', $this->Translate('Valvestate'),1, "PontosBase.Valve",144, $this->ReadPropertyBoolean('getVLVbool') == true);
+
 
 			// sort of static information 200
 			$this->MaintainVariable('getSRN', $this->Translate('Serial-no.'),1, "",200, $this->ReadPropertyBoolean('getSRNbool') == true);
@@ -286,7 +287,6 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			$this->MaintainVariable('getMAC', $this->Translate('MAC Address'),3, "",204, $this->ReadPropertyBoolean('getMACbool') == true);
 			
 
-			$this->MaintainVariable('getLOCK', $this->Translate('lock or unlock valve'),1, "PontosBase.Valve",90, $this->ReadPropertyBoolean('getLOCKbool') == true);
 
 			if  ($this->ReadPropertyBoolean('getLOCKbool') )
 			{
