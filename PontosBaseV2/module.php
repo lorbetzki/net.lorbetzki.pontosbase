@@ -84,142 +84,6 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			$this->RegisterPropertyInteger('getTMPSW', 0);
 			$this->RegisterPropertyBoolean('getTMPSWbool', false);
 
-			// create Profile
-			if (!@IPS_VariableProfileExists("PontosBase.Profile"))
-			{
-				IPS_CreateVariableProfile("PontosBase.Profile", 1);
-				IPS_SetVariableProfileDigits("PontosBase.Profile", 1);
-				IPS_SetVariableProfileAssociation("PontosBase.Profile", 1, $this->Translate('present'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Profile", 2, $this->Translate('absent'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Profile", 3, $this->Translate('holiday'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Profile", 4, $this->Translate('increased consumption'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Profile", 5, $this->Translate('max consumption'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Profile", 6, $this->Translate('not definied'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Profile", 7, $this->Translate('not definied'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Profile", 8, $this->Translate('not definied'), "", 0xFFFFFF);
-				IPS_SetVariableProfileValues("PontosBase.Profile", 1, 8, 1);
-			}
-			if (!@IPS_VariableProfileExists("PontosBase.Valve"))
-			{
-				IPS_CreateVariableProfile("PontosBase.Valve", 1);
-				IPS_SetVariableProfileDigits("PontosBase.Valve", 1);
-				IPS_SetVariableProfileAssociation("PontosBase.Valve", 10, $this->Translate('close'), "", 0xFF0000);
-				IPS_SetVariableProfileAssociation("PontosBase.Valve", 11, $this->Translate('will be closed'), "", 0xFF0000);
-				IPS_SetVariableProfileAssociation("PontosBase.Valve", 20, $this->Translate('open'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.Valve", 21, $this->Translate('will be opened'), "", 0x00FF00);
-				IPS_SetVariableProfileValues("PontosBase.Valve", 10, 20, 10);
-			}
-			if (!@IPS_VariableProfileExists("PontosBase.Mbar"))
-			{
-				IPS_CreateVariableProfile("PontosBase.Mbar", 1);
-				IPS_SetVariableProfileText ("PontosBase.Mbar", ""," mbar");
-			}
-			if (!@IPS_VariableProfileExists("PontosBase.Liter"))
-			{
-				IPS_CreateVariableProfile("PontosBase.Liter", 1);
-				IPS_SetVariableProfileText ("PontosBase.Liter", ""," L");
-			}
-			if (!@IPS_VariableProfileExists("PontosBase.Mliter"))
-			{
-				IPS_CreateVariableProfile("PontosBase.Mliter", 1);
-				IPS_SetVariableProfileText ("PontosBase.Mliter", ""," mL");
-			}
-			if (!@IPS_VariableProfileExists("PontosBase.Conductivity"))
-			{
-				IPS_CreateVariableProfile("PontosBase.Conductivity", 1);
-				IPS_SetVariableProfileText ("PontosBase.Conductivity", ""," µS/cm");
-			}
-			if (!@IPS_VariableProfileExists("PontosBase.Hardness"))
-			{
-				IPS_CreateVariableProfile("PontosBase.Hardness", 1);
-				IPS_SetVariableProfileDigits("PontosBase.Hardness", 1);
-				IPS_SetVariableProfileAssociation("PontosBase.Hardness", 4, $this->Translate('very soft'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.Hardness", 9, $this->Translate('soft'), "", 0x00DC00);
-				IPS_SetVariableProfileAssociation("PontosBase.Hardness", 15, $this->Translate('slightly hard'), "", 0x00C800);
-				IPS_SetVariableProfileAssociation("PontosBase.Hardness", 19, $this->Translate('moderately hard'), "", 0xFF0101);
-				IPS_SetVariableProfileAssociation("PontosBase.Hardness", 24, $this->Translate('hard'), "", 0xE60000);
-				IPS_SetVariableProfileAssociation("PontosBase.Hardness", 25, $this->Translate('very hard'), "", 0xC80000);
-
-				IPS_SetVariableProfileValues("PontosBase.Hardness", 0, 0, 1);
-			}
-			if (!@IPS_VariableProfileExists("PontosBase.Alarm"))
-			{
-				IPS_CreateVariableProfile("PontosBase.Alarm", 3);
-				IPS_SetVariableProfileAssociation("PontosBase.Alarm", "FF", $this->Translate('NO ALARM'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Alarm", "A1", $this->Translate('ALARM END SWITCH'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Alarm", "A2", $this->Translate('ALARM TURBINE BLOCKED'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Alarm", "A3", $this->Translate('ALARM VOLUME LEAKAGE'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Alarm", "A4", $this->Translate('ALARM TIME LEAKAGE'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Alarm", "A5", $this->Translate('ALARM MAX FLOW LEAKAGE'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Alarm", "A6", $this->Translate('ALARM MICRO LEAKAGE'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Alarm", "A7", $this->Translate('ALARM EXT. SENSOR LEAKAGE RADIO'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Alarm", "A8", $this->Translate('ALARM EXT. SENSOR LEAKAGE CABLE'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Alarm", "A9", $this->Translate('ALARM PRESSURE SENSOR ERROR'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Alarm", "AA", $this->Translate('ALARM TEMPERATURE SENSOR ERROR'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Alarm", "AB", $this->Translate('ALARM LOW BATTERY'), "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("PontosBase.Alarm", "AE", $this->Translate('Error: no more information available'), "", 0xFFFFFF);
-			}
-			if (!@IPS_VariableProfileExists("PontosBase.clrAla"))
-			{
-				IPS_CreateVariableProfile("PontosBase.clrAla", 1);
-				IPS_SetVariableProfileDigits("PontosBase.clrAla", 1);
-				IPS_SetVariableProfileAssociation("PontosBase.clrAla", 0, $this->Translate('clear Alarm'), "", 0x00FF00);
-			}
-
-			if (!@IPS_VariableProfileExists("PontosBase.WifiStatus"))
-			{
-				IPS_CreateVariableProfile("PontosBase.WifiStatus", 1);
-				IPS_SetVariableProfileAssociation("PontosBase.WifiStatus", 0, $this->Translate('Disconnect'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.WifiStatus", 1, $this->Translate('Connecting'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.WifiStatus", 2, $this->Translate('Connected'), "", 0x00FF00);
-				IPS_SetVariableProfileText ("PontosBase.WifiStatus", "","");
-			}
-
-			if (!@IPS_VariableProfileExists("PontosBase.DSM"))
-			{
-				IPS_CreateVariableProfile("PontosBase.DSM", 1);
-				IPS_SetVariableProfileAssociation("PontosBase.DSM", 0, $this->Translate('disabled'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.DSM", 1, $this->Translate('enabled'), "", 0x00FF00);
-				IPS_SetVariableProfileText ("PontosBase.DSM", "","");
-			}
-			
-			if (!@IPS_VariableProfileExists("PontosBase.SLP"))
-			{
-				IPS_CreateVariableProfile("PontosBase.SLP", 1);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 0, $this->Translate('disabled'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 1, $this->Translate('1 Tag'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 2, $this->Translate('2 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 3, $this->Translate('3 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 4, $this->Translate('4 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 5, $this->Translate('5 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 6, $this->Translate('6 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 7, $this->Translate('7 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 8, $this->Translate('8 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 9, $this->Translate('9 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 10, $this->Translate('10 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 11, $this->Translate('11 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 12, $this->Translate('12 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 13, $this->Translate('13 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 14, $this->Translate('14 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 15, $this->Translate('15 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 16, $this->Translate('16 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 17, $this->Translate('17 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 18, $this->Translate('18 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 19, $this->Translate('19 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 20, $this->Translate('20 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 21, $this->Translate('21 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 22, $this->Translate('22 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 23, $this->Translate('23 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 24, $this->Translate('24 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 25, $this->Translate('25 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 26, $this->Translate('26 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 27, $this->Translate('27 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileAssociation("PontosBase.SLP", 28, $this->Translate('28 Tage'), "", 0x00FF00);
-				IPS_SetVariableProfileText ("PontosBase.SLP", "","");
-				IPS_SetVariableProfileValues("PontosBase.SLP", 0, 28, 1);
-			}
-				
-
 			$this->RegisterTimer('PB_UpdateData', 0, 'PB_UpdateData($_IPS[\'TARGET\']);');
 			$this->RegisterPropertyInteger('UpdateDataInterval', 60);
 		
@@ -244,6 +108,140 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 				$this->SetStatus(102);
 			}
 			
+						// create Profile
+						if (!@IPS_VariableProfileExists("PontosBase.Profile"))
+						{
+							IPS_CreateVariableProfile("PontosBase.Profile", 1);
+							IPS_SetVariableProfileDigits("PontosBase.Profile", 1);
+							IPS_SetVariableProfileAssociation("PontosBase.Profile", 1, $this->Translate('present'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Profile", 2, $this->Translate('absent'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Profile", 3, $this->Translate('holiday'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Profile", 4, $this->Translate('increased consumption'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Profile", 5, $this->Translate('max consumption'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Profile", 6, $this->Translate('not definied'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Profile", 7, $this->Translate('not definied'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Profile", 8, $this->Translate('not definied'), "", 0xFFFFFF);
+							IPS_SetVariableProfileValues("PontosBase.Profile", 1, 8, 1);
+						}
+						if (!@IPS_VariableProfileExists("PontosBase.Valve"))
+						{
+							IPS_CreateVariableProfile("PontosBase.Valve", 1);
+							IPS_SetVariableProfileDigits("PontosBase.Valve", 1);
+							IPS_SetVariableProfileAssociation("PontosBase.Valve", 10, $this->Translate('close'), "", 0xFF0000);
+							IPS_SetVariableProfileAssociation("PontosBase.Valve", 11, $this->Translate('will be closed'), "", 0xFF0000);
+							IPS_SetVariableProfileAssociation("PontosBase.Valve", 20, $this->Translate('open'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.Valve", 21, $this->Translate('will be opened'), "", 0x00FF00);
+							IPS_SetVariableProfileValues("PontosBase.Valve", 10, 20, 10);
+						}
+						if (!@IPS_VariableProfileExists("PontosBase.Mbar"))
+						{
+							IPS_CreateVariableProfile("PontosBase.Mbar", 1);
+							IPS_SetVariableProfileText ("PontosBase.Mbar", ""," mbar");
+						}
+						if (!@IPS_VariableProfileExists("PontosBase.Liter"))
+						{
+							IPS_CreateVariableProfile("PontosBase.Liter", 1);
+							IPS_SetVariableProfileText ("PontosBase.Liter", ""," L");
+						}
+						if (!@IPS_VariableProfileExists("PontosBase.Mliter"))
+						{
+							IPS_CreateVariableProfile("PontosBase.Mliter", 1);
+							IPS_SetVariableProfileText ("PontosBase.Mliter", ""," mL");
+						}
+						if (!@IPS_VariableProfileExists("PontosBase.Conductivity"))
+						{
+							IPS_CreateVariableProfile("PontosBase.Conductivity", 1);
+							IPS_SetVariableProfileText ("PontosBase.Conductivity", ""," µS/cm");
+						}
+						if (!@IPS_VariableProfileExists("PontosBase.Hardness"))
+						{
+							IPS_CreateVariableProfile("PontosBase.Hardness", 1);
+							IPS_SetVariableProfileDigits("PontosBase.Hardness", 1);
+							IPS_SetVariableProfileAssociation("PontosBase.Hardness", 4, $this->Translate('very soft'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.Hardness", 9, $this->Translate('soft'), "", 0x00DC00);
+							IPS_SetVariableProfileAssociation("PontosBase.Hardness", 15, $this->Translate('slightly hard'), "", 0x00C800);
+							IPS_SetVariableProfileAssociation("PontosBase.Hardness", 19, $this->Translate('moderately hard'), "", 0xFF0101);
+							IPS_SetVariableProfileAssociation("PontosBase.Hardness", 24, $this->Translate('hard'), "", 0xE60000);
+							IPS_SetVariableProfileAssociation("PontosBase.Hardness", 25, $this->Translate('very hard'), "", 0xC80000);
+			
+							IPS_SetVariableProfileValues("PontosBase.Hardness", 0, 0, 1);
+						}
+						if (!@IPS_VariableProfileExists("PontosBase.Alarm"))
+						{
+							IPS_CreateVariableProfile("PontosBase.Alarm", 3);
+							IPS_SetVariableProfileAssociation("PontosBase.Alarm", "FF", $this->Translate('NO ALARM'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Alarm", "A1", $this->Translate('ALARM END SWITCH'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Alarm", "A2", $this->Translate('ALARM TURBINE BLOCKED'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Alarm", "A3", $this->Translate('ALARM VOLUME LEAKAGE'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Alarm", "A4", $this->Translate('ALARM TIME LEAKAGE'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Alarm", "A5", $this->Translate('ALARM MAX FLOW LEAKAGE'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Alarm", "A6", $this->Translate('ALARM MICRO LEAKAGE'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Alarm", "A7", $this->Translate('ALARM EXT. SENSOR LEAKAGE RADIO'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Alarm", "A8", $this->Translate('ALARM EXT. SENSOR LEAKAGE CABLE'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Alarm", "A9", $this->Translate('ALARM PRESSURE SENSOR ERROR'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Alarm", "AA", $this->Translate('ALARM TEMPERATURE SENSOR ERROR'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Alarm", "AB", $this->Translate('ALARM LOW BATTERY'), "", 0xFFFFFF);
+							IPS_SetVariableProfileAssociation("PontosBase.Alarm", "AE", $this->Translate('Error: no more information available'), "", 0xFFFFFF);
+						}
+						if (!@IPS_VariableProfileExists("PontosBase.clrAla"))
+						{
+							IPS_CreateVariableProfile("PontosBase.clrAla", 1);
+							IPS_SetVariableProfileDigits("PontosBase.clrAla", 1);
+							IPS_SetVariableProfileAssociation("PontosBase.clrAla", 0, $this->Translate('clear Alarm'), "", 0x00FF00);
+						}
+			
+						if (!@IPS_VariableProfileExists("PontosBase.WifiStatus"))
+						{
+							IPS_CreateVariableProfile("PontosBase.WifiStatus", 1);
+							IPS_SetVariableProfileAssociation("PontosBase.WifiStatus", 0, $this->Translate('Disconnect'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.WifiStatus", 1, $this->Translate('Connecting'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.WifiStatus", 2, $this->Translate('Connected'), "", 0x00FF00);
+							IPS_SetVariableProfileText ("PontosBase.WifiStatus", "","");
+						}
+			
+						if (!@IPS_VariableProfileExists("PontosBase.DSM"))
+						{
+							IPS_CreateVariableProfile("PontosBase.DSM", 1);
+							IPS_SetVariableProfileAssociation("PontosBase.DSM", 0, $this->Translate('disabled'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.DSM", 1, $this->Translate('enabled'), "", 0x00FF00);
+							IPS_SetVariableProfileText ("PontosBase.DSM", "","");
+						}
+						
+						if (!@IPS_VariableProfileExists("PontosBase.SLP"))
+						{
+							IPS_CreateVariableProfile("PontosBase.SLP", 1);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 0, $this->Translate('disabled'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 1, $this->Translate('2 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 2, $this->Translate('3 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 3, $this->Translate('4 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 4, $this->Translate('5 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 5, $this->Translate('6 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 6, $this->Translate('7 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 7, $this->Translate('8 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 8, $this->Translate('9 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 9, $this->Translate('10 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 10, $this->Translate('11 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 11, $this->Translate('12 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 12, $this->Translate('13 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 13, $this->Translate('14 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 14, $this->Translate('15 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 15, $this->Translate('16 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 16, $this->Translate('17 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 17, $this->Translate('18 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 18, $this->Translate('19 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 19, $this->Translate('20 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 20, $this->Translate('21 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 21, $this->Translate('22 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 22, $this->Translate('23 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 23, $this->Translate('24 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 24, $this->Translate('25 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 25, $this->Translate('26 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 26, $this->Translate('27 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileAssociation("PontosBase.SLP", 27, $this->Translate('28 Tage'), "", 0x00FF00);
+							IPS_SetVariableProfileText ("PontosBase.SLP", "","");
+							IPS_SetVariableProfileValues("PontosBase.SLP", 0, 27, 1);
+						}
+						
 			############################### 
 			// Sort 100-110 for profiles
 			$this->MaintainVariable('getPN', $this->Translate('name of active profile'),3, "",100, $this->ReadPropertyBoolean('getPNbool') == true);
