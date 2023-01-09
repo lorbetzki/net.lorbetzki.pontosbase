@@ -537,9 +537,10 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 
 		private function WriteSetting(string $setting, int $value)
 		{
-			//$adminmodeenable	= $this->ReadAttributeBoolean('AdminMode');
 			$ipaddress	 		= $this->ReadPropertyString('IPAddress');
 			$uri       			= 'http://'.$ipaddress.':5333/Pontos-Base';
+			
+			$this->EnableAdminMode(true);
 
 			switch($setting)
 			{
@@ -561,19 +562,21 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 				case 'SLP':
 					$uri = $uri."/set/slp/".$value;	
 					Sys_getURLContent($uri);
-					$this->LogMessage($this->Translate('set self learning procedure').$value, KL_MESSAGE);
+					$this->LogMessage($this->Translate('set self learning procedure ').$value, KL_MESSAGE);
 				break;
 				case 'IDS':
 					$uri = $uri."/set/ids/".$value;	
 					Sys_getURLContent($uri);
-					$this->LogMessage($this->Translate('set daylight saving mode').$value, KL_MESSAGE);
+					$this->LogMessage($this->Translate('set daylight saving mode ').$value, KL_MESSAGE);
 				break;
 				case 'TMP':
 					$uri = $uri."/set/tmp/".$value;	
 					Sys_getURLContent($uri);
-					$this->LogMessage($this->Translate('set deactivation time for temporary leakage detection').$value, KL_MESSAGE);
+					$this->LogMessage($this->Translate('set deactivation time for temporary leakage detection ').$value, KL_MESSAGE);
 				break;
 			}
+			$this->EnableAdminMode(false);
+
 		}
 
 		public function RequestAction($Ident, $Value)
