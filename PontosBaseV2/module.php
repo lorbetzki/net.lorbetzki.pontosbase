@@ -514,7 +514,7 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			curl_close($ch);
 
 			if (empty($response) || $response === false || !empty($curl_error)) {
-				$this->SendDebug(__FUNCTION__, 'no response from device, wrong IP Address or device out of range!' . $curl_error, 0);
+				$this->SendDebug(__FUNCTION__, 'CheckConnection(): no response from device, wrong IP Address or device out of range!' . $curl_error, 0);
 				$this->LogMessage($this->Translate('CheckConnection(): no response from device, wrong IP Address or device out of range!'), KL_ERROR);
 				//echo "no response from device, wrong IP Address or device out of range!";
 				$this->SetStatus(201);
@@ -525,6 +525,11 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 				$this->SendDebug(__FUNCTION__, 'Device is reachable' . $curl_error, 0);
 				$this->LogMessage($this->Translate('CheckConnection(): Device is reachable'), KL_MESSAGE);
 				//echo "Device is reachable!";
+				
+				if ($this->GetStatus() == 201) 
+				{
+					$this->SetStatus(100);
+				}
 				return true;
 			}
 			$responseData = json_decode($response, TRUE);

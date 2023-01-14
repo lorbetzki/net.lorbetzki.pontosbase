@@ -259,8 +259,8 @@
         },
         {  
             "code": 201, 
-            "icon": "error", 
-            "caption": "please enter Hostname or IP Address of the device!" 
+            "icon": "inactive", 
+            "caption": "Wifi Connection not stable, try again later!" 
         }
     ]
 }

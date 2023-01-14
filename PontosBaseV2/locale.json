@@ -86,7 +86,8 @@
             "enabled":"aktiviert",
             "Disconnect":"nicht verbunden",
             "Connected":"verbunden",
-            "Connecting":"wird verbunden"
-        }
+            "Connecting":"wird verbunden",
+            "Wifi Connection not stable, try again later!": "Wifi Verbindung ist nicht Stabil, probiere es gleich nochmal!",
+            "CheckConnection(): no response from device, wrong IP Address or device out of range!": "CheckConnection(): keine Antwort vom Gerät, falsche IP-Adresse oder Gerät nicht erreichbar!"        }
     }
 }
