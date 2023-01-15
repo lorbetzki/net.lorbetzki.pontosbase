@@ -243,7 +243,7 @@
     ],
     "status": [
         {  
-            "code": 100, 
+            "code": 102, 
             "icon": "active", 
             "caption": "instance is active" 
         },

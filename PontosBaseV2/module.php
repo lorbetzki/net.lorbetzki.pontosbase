@@ -528,7 +528,7 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 				
 				if ($this->GetStatus() == 201) 
 				{
-					$this->SetStatus(100);
+					$this->SetStatus(102);
 				}
 				return true;
 			}
