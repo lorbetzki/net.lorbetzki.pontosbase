@@ -72,7 +72,7 @@
             "set daylight saving mode": "aktiviere Stromsparmodus des Display",
             "set temporary deactivation for leakage detection time in sec.":"temporäre Deaktivierung der Leckageerkennung in sek.",
             "Wifi connection state":"Wifi Verbindungsstatus",
-            "Wifi connection strength RSSI":"Wifi Signalstärke RSSI",
+            "Wifi connection strength (RSSI)":"Wifi Signalstärke (RSSI)",
             "no pulse time of turbine in seconds":"zeit in sek. seit Turbine keinen Impuls bekommt",
             "volume of the current water consumption process in ml":"Volumen des aktuellen Wasserverbrauchs in ml",
             "configured Micro Leakage test pressure drop in bar":"konfigurierter Micro Leakage-Test, Druckabfall in bar",

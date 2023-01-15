@@ -116,7 +116,7 @@
                  },
                 {
                     "type": "CheckBox",
-                    "caption": "Wifi connection strength RSSI",
+                    "caption": "Wifi connection strength (RSSI)",
                     "name": "getWFRbool"
                  },
                  {
