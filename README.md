@@ -119,15 +119,7 @@ temporäre Deaktivierung der Leckageerkennung in sek.	| Integer | Schaltbares Ak
 
 Aktualisierung aller Daten.
 
-`PB_GetOneData(integer $InstanzID, string $Key);`
+`PB_GetData(integer $InstanzID, string $Key="all");`
 
-Aktualisierung bestimmter Daten. Bspw. 
-`PB_GetOneData(12345, "CND");` 
-holt die Wasserleitfähigkeit ab.
-
-`PB_GetAllData(integer $InstanzID);`
-
-holt viele, aber leider nicht wirklich alle Daten ab und stellt diese als Array zur Verfügung
-
-`PB_CheckConnection(integer $InstanzID);`
-prüft ob die Pontos Base erreichbar ist.
+wird `PB_GetData(12345);` ohne Paramter aufgerufen werden viele Daten abgeholt, jedoch nicht alle. Möchte man bestimmte Daten. Bspw. 
+`PB_GetData(12345, "CND");` wird die Wasserleitfähigkeit abgeholt.

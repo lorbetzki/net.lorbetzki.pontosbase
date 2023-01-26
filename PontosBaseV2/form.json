@@ -215,6 +215,34 @@
                     "name": "getMACbool"
                  }
                  ]
+            },
+            {
+                "type": "PopupAlert",
+                "name": "ConnOK",
+                "visible": false,
+                "popup": {
+                    "closeCaption": "OK",
+                    "items": [
+                        {
+                           "type": "Label",
+                           "caption": "Connection OK!"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "PopupAlert",
+                "name": "ConnNOK",
+                "visible": false,
+                "popup": {
+                    "closeCaption": "OK",
+                    "items": [
+                        {
+                           "type": "Label",
+                           "caption": "Connection not OK!"
+                        }
+                    ]
+                }
             }
 
     ],
@@ -237,7 +265,7 @@
             "type": "Button",
             "caption": "Check Connection",
             "name": "CheckConnection",
-            "onClick": "PB_CheckConnection($id);",
+            "onClick": "IPS_RequestAction($id, 'CheckConnection', '');",
             "visible": true
         } 
     ],

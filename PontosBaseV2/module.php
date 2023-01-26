@@ -340,9 +340,9 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 
 				$this->LogMessage($this->Translate('update data'), KL_MESSAGE);
 
-				$DataAll = $this->GetAllData();
-				$DataCND = $this->GetOneData("CND"); // water  conductivity level must be get separately
-				$DataSLP = $this->GetOneData("SLP"); // Self learning program
+				$DataAll = $this->GetData();
+				$DataCND = $this->GetData("CND"); // water  conductivity level must be get separately
+				$DataSLP = $this->GetData("SLP"); // Self learning program
 
 				if (!is_array($DataAll) || !is_array($DataCND) || !is_array($DataSLP)) {
 					$this->LogMessage($this->Translate('problems to get data, data is not an array, try again later'), KL_ERROR);
@@ -431,7 +431,7 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 		}	
 
 
-		public function GetOneData(string $key)
+		public function GetData(string $key="all")
 		{
 			
 			$ipaddress	 		= $this->ReadPropertyString('IPAddress');
@@ -440,19 +440,19 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			// entering Admin mode
 			$this->EnableAdminMode(true);
 
-			$this->LogMessage($this->Translate('get data for Key: ').$key, KL_MESSAGE);
+			$this->LogMessage($this->Translate('GetData(): get data for Key: ').$key, KL_MESSAGE);
 
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $uri);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-			curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
-			curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+			curl_setopt($ch, CURLOPT_NOSIGNAL, TRUE);
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
 			$response = curl_exec($ch);
 			$curl_error = curl_error($ch);
 			curl_close($ch);
 			if (empty($response) || $response === false || !empty($curl_error)) {
-				$this->SendDebug(__FUNCTION__, 'no response from device' . $curl_error, 0);
-				$this->LogMessage($this->Translate('GetOneData(): Error to get data'), KL_ERROR);
+				$this->SendDebug(__FUNCTION__, 'GetData(): no response from device' . $curl_error, 0);
+				$this->LogMessage($this->Translate('GetData(): Error to get data'), KL_ERROR);
 				return false;
 			}
 			$responseData = json_decode($response, TRUE);
@@ -463,52 +463,21 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			return $responseData;	
 		}
 
-		public function GetAllData()
+		private function CheckConnection()
 		{
-			$ipaddress	 		= $this->ReadPropertyString('IPAddress');
-			$uri       			= 'http://'.$ipaddress.':5333/Pontos-Base/get/all';
-			
-			$this->EnableAdminMode(true);
-
-			$this->LogMessage($this->Translate('get all data'), KL_MESSAGE);
-
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, $uri);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-			curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
-			curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-			$response = curl_exec($ch);
-			$curl_error = curl_error($ch);
-
-			curl_close($ch);
-			if (empty($response) || $response === false || !empty($curl_error)) {
-				$this->SendDebug(__FUNCTION__, 'no response from device: ' . $curl_error, 0);
-				$this->LogMessage($this->Translate('GetAllData(): Error to get data'), KL_ERROR);
-				return false;
-			}
-
-			$responseData = json_decode($response, TRUE);
-			$this->SendDebug(__FUNCTION__, $response, 0);
-			$this->EnableAdminMode(false);
-
-			return $responseData;	
-		}
-
-		public function CheckConnection()
-		{
-			$this->LogMessage($this->Translate('check Wifi Connection'), KL_MESSAGE);
-
 			$ipaddress	 		= $this->ReadPropertyString('IPAddress');
 			$uri       			= 'http://'.$ipaddress.':5333/Pontos-Base/get/WFS';
 			
-			$this->LogMessage($this->Translate('Check Wifi Connection: '), KL_MESSAGE);
+			$this->LogMessage($this->Translate('CheckConnection(): Check Wifi Connection: '), KL_MESSAGE);
 
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $uri);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-			curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
-			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 6); 
-			curl_setopt($ch, CURLOPT_TIMEOUT, 7);
+			curl_setopt($ch, CURLOPT_NOSIGNAL, TRUE);
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10); 
+			//curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+			//$Infocode = curl_getinfo($ch,CURLINFO_RESPONSE_CODE);
+
 			$response = curl_exec($ch);
 			$curl_error = curl_error($ch);
 			curl_close($ch);
@@ -516,13 +485,12 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			if (empty($response) || $response === false || !empty($curl_error)) {
 				$this->SendDebug(__FUNCTION__, 'CheckConnection(): no response from device, wrong IP Address or device out of range!' . $curl_error, 0);
 				$this->LogMessage($this->Translate('CheckConnection(): no response from device, wrong IP Address or device out of range!'), KL_ERROR);
-				//echo "no response from device, wrong IP Address or device out of range!";
 				$this->SetStatus(201);
 				return false;
 			}
 			else
 			{
-				$this->SendDebug(__FUNCTION__, 'Device is reachable' . $curl_error, 0);
+				$this->SendDebug(__FUNCTION__, 'CheckConnection(): Device is reachable' . $curl_error, 0);
 				$this->LogMessage($this->Translate('CheckConnection(): Device is reachable'), KL_MESSAGE);
 				//echo "Device is reachable!";
 				
@@ -532,10 +500,6 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 				}
 				return true;
 			}
-			$responseData = json_decode($response, TRUE);
-			$this->SendDebug(__FUNCTION__, $response, 0);
-			return $responseData;
-
 		}
 
 		private function WriteSetting(string $setting, int $value)
@@ -617,6 +581,16 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 				break;
 				case 'ClearAlarmFromForm':
 					$this->WriteSetting("ClearAlarm", 0);
+				break;
+				case 'CheckConnection':
+					if ($this->CheckConnection())
+						{
+							$this->UpdateFormField("ConnOK", "visible", true);
+						}
+					else
+						{
+							$this->UpdateFormField("ConnNOK", "visible", true);
+						}
 				break;
 			}
 		}
