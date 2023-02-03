@@ -84,7 +84,12 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			$this->RegisterPropertyInteger('getTMPSW', 0);
 			$this->RegisterPropertyBoolean('getTMPSWbool', false);
 
+			//update all Data
 			$this->RegisterTimer('PB_UpdateData', 0, 'PB_UpdateData($_IPS[\'TARGET\']);');
+			// internal Timer for Clear Alarm
+			$this->RegisterTimer('ClearAlarmTimer',0,'IPS_RequestAction($_IPS["TARGET"], "getALASW", "ClearAlarmTimer");');
+			// internal Timer for valvestate
+			$this->RegisterTimer('ValveStateTimer',0,'IPS_RequestAction($_IPS["TARGET"], "ValveStateTimer", "ValveStateTimer");');		
 			$this->RegisterPropertyInteger('UpdateDataInterval', 60);
 		
 		}
@@ -560,12 +565,18 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 					if ($Value == 10){$Value = 2;} // set/ab/2 close valve
 					if ($Value == 20){$Value = 1;} // set/ab/1 open valve
 					$this->WriteSetting("lock", $Value);
+					$this->SetTimerInterval('ValveStateTimer', 3000);
 				break;
 				case 'getALASW':
-					$this->WriteSetting("ClearAlarm", 0);
-					$this->SetValue("getALASW", true);
-					ips_sleep(1500);
-					$this->SetValue("getALASW", false);
+					if ($Value == 0)
+					{
+						$this->MaintainTimer('ClearAlarmTimer');
+					}
+					if ($Value === "ClearAlarmTimer")
+					{
+						$this->SetTimerInterval('ClearAlarmTimer', 0);
+						IPS_SetVariableProfileAssociation("PontosBase.clrAla", 0, $this->Translate('clear Alarm'), "", 0x00FF00);
+					}
 				break;
 				case 'getSLPSW':
 					$this->SetValue("getSLPSW", $Value);
@@ -592,6 +603,9 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 							$this->UpdateFormField("ConnNOK", "visible", true);
 						}
 				break;
+				case 'ValveStateTimer':
+					$this->MaintainTimer('ValveStateTimer');
+				break;
 			}
 		}
 
@@ -612,5 +626,33 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 					$this->LogMessage($this->Translate('leave AdminMode'), KL_MESSAGE);
 				break;			
 			}
+		}
+
+		private function MaintainTimer(string $TimerIdent)
+		{	
+
+			switch($TimerIdent){
+				case "ClearAlarmTimer":
+						$this->WriteSetting("ClearAlarm", 0);
+						$this->LogMessage($this->Translate('ClearAlarmTimer: set Alarm off'), KL_MESSAGE);
+						IPS_SetVariableProfileAssociation("PontosBase.clrAla", 0, $this->Translate('clearing Alarm'), "", 0x808080);
+						$this->SetTimerInterval($TimerIdent, 1500);
+				break;
+									   
+				case "ValveStateTimer":
+					$this->LogMessage($this->Translate('ValveStateTimer: get Valve state'), KL_MESSAGE);
+					$ValveState = $this->GetData('VLV');
+					
+					$this->LogMessage($this->Translate('ValveStateTimer: Valve state is in progress, do a loop.'), KL_MESSAGE);
+					$this->SetValue("getVLV", $ValveState['getVLV']);
+
+					if ( ($ValveState['getVLV'] == 10) || ($ValveState['getVLV'] == 20) )
+					{
+						$this->SetTimerInterval($TimerIdent, 0);
+						$this->LogMessage($this->Translate('ValveStateTimer: Valve state is reached, stop timer.'), KL_MESSAGE);
+					} 
+					
+				break;
+				}			
 		}
 }

@@ -267,7 +267,14 @@
             "name": "CheckConnection",
             "onClick": "IPS_RequestAction($id, 'CheckConnection', '');",
             "visible": true
-        } 
+        },
+        {
+            "type": "Button",
+            "caption": "Check Valvestate",
+            "name": "CheckValvestate",
+            "onClick": "IPS_RequestAction($id, 'ValveStateTimer', '');",
+            "visible": true
+        }  
     ],
     "status": [
         {  

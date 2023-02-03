@@ -98,7 +98,8 @@
             "ALARM MICRO LEAKAGE":"ALARM: Mikroleckage entdeckt!",
             "ALARM PRESSURE SENSOR ERROR":"ALARM: Drucksensor fehlerhaft!",
             "ALARM TEMPERATURE SENSOR ERROR":"ALARM: Temperatursensor fehlerhaft!",
-            "ALARM LOW BATTERY":"ALARM: Batterie schwach!"
+            "ALARM LOW BATTERY":"ALARM: Batterie schwach!",
+            "please enter Hostname or IP Address!":"Bitte Hostname oder IP Adresse eingeben!"
         }     
     }
 }
