@@ -97,6 +97,17 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 		public function Destroy()
 		{
 			//Never delete this line!
+			if (!IPS_InstanceExists($this->InstanceID)) {
+				$Profile = IPS_GetVariableProfileList();
+
+				foreach($Profile as $key =>$value) {
+					$ISM_Profile = strpos($value,"PontosBase.");
+						if ($ISM_Profile === 0)
+						{
+							$this->UnregisterProfile("$value");
+						}
+				}
+			}	
 			parent::Destroy();
 		}
 
