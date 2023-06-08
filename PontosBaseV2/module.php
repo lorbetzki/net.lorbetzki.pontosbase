@@ -89,7 +89,8 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			// internal Timer for Clear Alarm
 			$this->RegisterTimer('ClearAlarmTimer',0,'IPS_RequestAction($_IPS["TARGET"], "getALASW", "ClearAlarmTimer");');
 			// internal Timer for valvestate
-			$this->RegisterTimer('ValveStateTimer',0,'IPS_RequestAction($_IPS["TARGET"], "ValveStateTimer", "ValveStateTimer");');		
+			$this->RegisterTimer('ValveStateTimer',0,'IPS_RequestAction($_IPS["TARGET"], "ValveStateTimer", "ValveStateTimer");');	
+			
 			$this->RegisterPropertyInteger('UpdateDataInterval', 60);
 		
 		}
@@ -505,6 +506,7 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 				$this->SendDebug(__FUNCTION__, 'CheckConnection(): no response from device, wrong IP Address or device out of range!' . $curl_error, 0);
 				$this->LogMessage($this->Translate('CheckConnection(): no response from device, wrong IP Address or device out of range!'), KL_ERROR);
 				$this->SetStatus(201);
+				$this->SetValue("getWFS", 0);
 				return false;
 			}
 			else
@@ -667,6 +669,6 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 					} 
 					
 				break;
-				}			
+			}			
 		}
 }
