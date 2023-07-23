@@ -10,7 +10,7 @@ die Pontos Base ist ein Wassermanagmentsystems der Firmware Hansgrohe und wird, 
 5. [Statusvariablen und Profile](#5-statusvariablen-und-profile)
 6. [WebFront](#6-webfront)
 7. [PHP-Befehlsreferenz](#7-php-befehlsreferenz)
-8. [manuelles Up/Downgrade der Firmware](8#-manuelles-Up/Downgrade-der-Firmware)
+8. [manuelles flashen der Firmware](#8-manuelles-flashen-der-firmware)
 
 ### 1. Funktionsumfang
 
@@ -125,7 +125,7 @@ Aktualisierung aller Daten.
 wird `PB_GetData(12345);` ohne Paramter aufgerufen werden viele Daten abgeholt, jedoch nicht alle. Möchte man bestimmte Daten. Bspw. 
 `PB_GetData(12345, "CND");` wird die Wasserleitfähigkeit abgeholt.
 
-### 8. manuelles Up/Downgrade der Firmware
+### 8. manuelles flashen der Firmware
 
 Derzeit scheint es mit der ausgerollten Version 1.30 (Stand 06/2023) Probleme mit dem WLAN zu kommen. Um manuell auf eine Firmware downzugraden müsste ihr euch [hier](https://husty.pl/firmware/pontosbase/) eine Firmware runterladen. Derzeit ist die Version 1.29 als Stabil zu betrachten. 
 
@@ -136,3 +136,5 @@ Habt Ihr die passende Firmware runtergeladen müsst Ihr euch mit einem PC/Laptop
 Nachdem Ihr beides miteinander verbunden habt, erscheint ein neues Laufwerk, dabei handelt es sich um einen freien Speicherbereich der Pontos. Schiebt nun die runtergeladene Firmware auf das freie Laufwerk und benennt die Datei in "pontosbase.bin". Ist der Kopiervorgang beendet, löst ihr nun das USB Kabel, die 9V Batterie UND das Netzteil. Wartet 10 sek. und steckt das Netzteil und dann die 9V Batterie wieder an. Die Pontosbase fängt an, Rot zu blinken.
 
 Der Flashvorgang ist beendet und die Firmware auf dem gewünschten Stand.
+
+[def]: 8#-manuelles-flashen-der-firmware
