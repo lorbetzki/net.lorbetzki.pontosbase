@@ -11,8 +11,8 @@
         },
         { "type": "Select", 
         "name": "Modell", 
-        "caption": "Which modell you have?",
-        "value": "0",
+        "caption": "Choose Model",
+        "value": "Pontos-Base",
         "visible": true,
         "options": [
             { "caption": "Hans Grohe Pontos Base", "value": "Pontos-Base" },

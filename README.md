@@ -1,6 +1,8 @@
 # Pontos Base V2
 die Pontos Base ist ein Wassermanagmentsystems der Firmware Hansgrohe und wird, am besten unmittelbar hinter dem ersten Absperrhahn der Hauptwasserleitung installiert. Es überwacht zum einen - nach einer Selbstlernphase- den üblichen Verbrauch und sperrt bei überproportionalen Vebrauch die Hauptleitung. Zudem besitzt es eine Mikroleckageerkennung. Danker verschiedener umschaltbaren Profile kann man für Urlaub oder kurzfristig überhöhten Verbrauch (Poolbefüllung bspw) umschalten.
 
+Seit Version 2.1 des Moduls wird auch wieder die Syr Safe-Tech experimentell unterstützt.
+
 ### Inhaltsverzeichnis
 
 1. [Funktionsumfang](#1-funktionsumfang)
@@ -38,7 +40,8 @@ __Konfigurationsseite__:
 
 Name          				     | Beschreibung
 -------------------------------- | -------------------------------------------------------
- IP Adresse                      | IP Adresse oder Hostname des Gerätes
+IP Adresse                       | IP Adresse oder Hostname des Gerätes
+Modellauswahl				     | Auswahl um welches Modell es sich handelt.
 Intervall in sek                 | Abrufintervall. 0 deaktiviert das automatische abrufen
 Auswahl Standardvariablen        | Auswahl diverser Variablen
 Auswahl zusätzlicher Variablen   | Auswahl diverser Variablen
