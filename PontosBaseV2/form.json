@@ -9,6 +9,16 @@
             "name": "IPAddress", 
             "caption": "IP Address or Hostname" 
         },
+        { "type": "Select", 
+        "name": "Modell", 
+        "caption": "Which modell you have?",
+        "value": "0",
+        "visible": true,
+        "options": [
+            { "caption": "Hans Grohe Pontos Base", "value": "Pontos-Base" },
+            { "caption": "Syr SafeTech ", "value": "safe-tec" }
+            ]
+    },
         {
             "type": "NumberSpinner",
             "name": "UpdateDataInterval",
