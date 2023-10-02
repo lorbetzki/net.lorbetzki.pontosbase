@@ -11,7 +11,7 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			//Never delete this line!
 			parent::Create();
 			$this->RegisterPropertyString('IPAddress', '');
-			$this->RegisterPropertyString('Modell', '0');
+			$this->RegisterPropertyString('Modell', 'Pontos-Base');
 			$this->RegisterAttributeString('URI', '');
 
 			$this->RegisterAttributeBoolean('AdminMode', true);
@@ -339,7 +339,7 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			$jsonForm = json_decode(file_get_contents(__DIR__ . "/form.json"), true);
 			
 			if ($this->Getstatus() == 104 ){
-				$jsonForm["elements"][3]["visible"] = true;
+				$jsonForm["elements"][4]["visible"] = true;
 			}
 
 			if (!$this->ReadPropertyString('IPAddress') )
@@ -452,7 +452,8 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 		{
 			
 			$ipaddress	 		= $this->ReadPropertyString('IPAddress');
-			$uri       			= 'http://'.$ipaddress.':5333/Pontos-Base/get/'.$key.'';
+			$Modell				= $this->ReadPropertyString('Modell');
+			$uri       			= 'http://'.$ipaddress.':5333/'.$Modell.'/get/'.$key.'';
 			
 			// entering Admin mode
 			$this->EnableAdminMode(true);
@@ -485,7 +486,8 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 		private function CheckConnection()
 		{
 			$ipaddress	 		= $this->ReadPropertyString('IPAddress');
-			$uri       			= 'http://'.$ipaddress.':5333/Pontos-Base/get/WFS';
+			$Modell				= $this->ReadPropertyString('Modell');
+			$uri       			= 'http://'.$ipaddress.':5333/'.$Modell.'/get/WFS';
 			
 			$this->LogMessage($this->Translate('CheckConnection(): Check Wifi Connection: '), KL_MESSAGE);
 
@@ -526,7 +528,8 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 		private function WriteSetting(string $setting, int $value)
 		{
 			$ipaddress	 		= $this->ReadPropertyString('IPAddress');
-			$uri       			= 'http://'.$ipaddress.':5333/Pontos-Base';
+			$Modell				= $this->ReadPropertyString('Modell');
+			$uri       			= 'http://'.$ipaddress.':5333/'.$Modell;
 			
 			$this->EnableAdminMode(true);
 
@@ -628,7 +631,8 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 		private function EnableAdminMode(bool $YesNo)
 		{
 			$ipaddress	 		= $this->ReadPropertyString('IPAddress');
-			$uri       			= 'http://'.$ipaddress.':5333/Pontos-Base';
+			$Modell				= $this->ReadPropertyString('Modell');
+			$uri       			= 'http://'.$ipaddress.':5333/'.$Modell;
 			switch($YesNo)
 			{
 				case true:
