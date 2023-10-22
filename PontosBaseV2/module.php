@@ -355,14 +355,17 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			if ($this->CheckConnection() == true) 
 			{
 
-				$this->LogMessage($this->Translate('update data'), KL_MESSAGE);
+				//$this->LogMessage($this->Translate('update data'), KL_MESSAGE);
+				$this->SendDebug(__FUNCTION__,'update data', 0);
 
 				$DataAll = $this->GetData();
 				$DataCND = $this->GetData("CND"); // water  conductivity level must be get separately
 				$DataSLP = $this->GetData("SLP"); // Self learning program
 
 				if (!is_array($DataAll) || !is_array($DataCND) || !is_array($DataSLP)) {
-					$this->LogMessage($this->Translate('problems to get data, data is not an array, try again later'), KL_ERROR);
+					//$this->LogMessage($this->Translate('problems to get data, data is not an array, try again later'), KL_ERROR);
+					$this->SendDebug(__FUNCTION__,'problems to get data, data is not an array, try again later', 0);
+					
 					exit; 
 				}
 
@@ -458,7 +461,8 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			// entering Admin mode
 			$this->EnableAdminMode(true);
 
-			$this->LogMessage($this->Translate('GetData(): get data for Key: ').$key, KL_MESSAGE);
+			//$this->LogMessage($this->Translate('GetData(): get data for Key: ').$key, KL_MESSAGE);
+			$this->SendDebug(__FUNCTION__, 'GetData(): get data for Key: '.$key, 0);
 
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $uri);
@@ -472,7 +476,7 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			curl_close($ch);
 			if (empty($response) || $response === false || !empty($curl_error)) {
 				$this->SendDebug(__FUNCTION__, 'GetData(): no response from device' . $curl_error, 0);
-				$this->LogMessage($this->Translate('GetData(): Error to get data'), KL_ERROR);
+				//$this->LogMessage($this->Translate('GetData(): Error to get data'), KL_ERROR);
 				return false;
 			}
 			$responseData = json_decode($response, TRUE);
@@ -489,7 +493,8 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			$Modell				= $this->ReadPropertyString('Modell');
 			$uri       			= 'http://'.$ipaddress.':5333/'.$Modell.'/get/WFS';
 			
-			$this->LogMessage($this->Translate('CheckConnection(): Check Wifi Connection: '), KL_MESSAGE);
+			//$this->LogMessage($this->Translate('CheckConnection(): Check Wifi Connection: '), KL_MESSAGE);
+			$this->SendDebug(__FUNCTION__, 'CheckConnection(): Check Wifi Connection: ', 0);
 
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $uri);
@@ -514,8 +519,7 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			else
 			{
 				$this->SendDebug(__FUNCTION__, 'CheckConnection(): Device is reachable' . $curl_error, 0);
-				$this->LogMessage($this->Translate('CheckConnection(): Device is reachable'), KL_MESSAGE);
-				//echo "Device is reachable!";
+				//$this->LogMessage($this->Translate('CheckConnection(): Device is reachable'), KL_MESSAGE);
 				
 				if ($this->GetStatus() == 201) 
 				{
@@ -538,32 +542,42 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 				case 'profile':
 						$uri = $uri."/set/prf/".$value;
 						Sys_getURLContent($uri);
-						$this->LogMessage($this->Translate('set profile ').$value, KL_MESSAGE);
+						//$this->LogMessage($this->Translate('set profile ').$value, KL_MESSAGE);
+						$this->SendDebug(__FUNCTION__, 'set profile '.$value, 0);
+
 				break;
 				case 'lock':
 						$uri = $uri."/set/ab/".$value;
 						Sys_getURLContent($uri);
-						$this->LogMessage($this->Translate('set valve state ').$value, KL_MESSAGE);
+						//$this->LogMessage($this->Translate('set valve state ').$value, KL_MESSAGE);
+						$this->SendDebug(__FUNCTION__, 'set valve state '.$value, 0);
+
 				break;
 				case 'ClearAlarm':
 					$uri = $uri."/clr/ala";	
 					Sys_getURLContent($uri);
-					$this->LogMessage($this->Translate('Alarm cleared'), KL_MESSAGE);
+					//$this->LogMessage($this->Translate('Alarm cleared'), KL_MESSAGE);
+					$this->SendDebug(__FUNCTION__, 'Alarm cleared', 0);
+
 				break;
 				case 'SLP':
 					$uri = $uri."/set/slp/".$value;	
 					Sys_getURLContent($uri);
-					$this->LogMessage($this->Translate('set self learning procedure ').$value, KL_MESSAGE);
+//					$this->LogMessage($this->Translate('set self learning procedure ').$value, KL_MESSAGE);
+					$this->SendDebug(__FUNCTION__, 'set self learning procedure '.$value, 0);
+
 				break;
 				case 'IDS':
 					$uri = $uri."/set/ids/".$value;	
 					Sys_getURLContent($uri);
-					$this->LogMessage($this->Translate('set daylight saving mode ').$value, KL_MESSAGE);
+					//$this->LogMessage($this->Translate('set daylight saving mode ').$value, KL_MESSAGE);
+					$this->SendDebug(__FUNCTION__, 'set daylight saving mode '.$value, 0);
 				break;
 				case 'TMP':
 					$uri = $uri."/set/tmp/".$value;	
 					Sys_getURLContent($uri);
-					$this->LogMessage($this->Translate('set deactivation time for temporary leakage detection ').$value, KL_MESSAGE);
+					//$this->LogMessage($this->Translate('set deactivation time for temporary leakage detection ').$value, KL_MESSAGE);
+					$this->SendDebug(__FUNCTION__, 'set deactivation time for temporary leakage detection '.$value, 0);
 				break;
 			}
 			$this->EnableAdminMode(false);
@@ -573,7 +587,7 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 		public function RequestAction($Ident, $Value)
 		{
 			$this->LogMessage("RequestAction : $Ident, $Value",KL_NOTIFY);
-
+			
 			switch ($Ident) {
 				case 'getPROFILESW':
 					$this->SetValue("getPROFILESW", $Value);
@@ -638,12 +652,14 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 				case true:
 					$uri = $uri."/set/ADM/(2)f";
 					Sys_getURLContent($uri);
-					$this->LogMessage($this->Translate('entering AdminMode'), KL_MESSAGE);
+					//$this->LogMessage($this->Translate('entering AdminMode'), KL_MESSAGE);
+					$this->SendDebug(__FUNCTION__, 'entering AdminMode', 0);
 				break;
 				case false:
 					$uri = $uri."/clr/ADM";
 					Sys_getURLContent($uri);
-					$this->LogMessage($this->Translate('leave AdminMode'), KL_MESSAGE);
+					//$this->LogMessage($this->Translate('leave AdminMode'), KL_MESSAGE);
+					$this->SendDebug(__FUNCTION__, 'leave AdminMode', 0);
 				break;			
 			}
 		}
