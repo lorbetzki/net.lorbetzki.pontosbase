@@ -513,7 +513,10 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 				$this->SendDebug(__FUNCTION__, 'CheckConnection(): no response from device, wrong IP Address or device out of range!' . $curl_error, 0);
 				$this->LogMessage($this->Translate('CheckConnection(): no response from device, wrong IP Address or device out of range!'), KL_ERROR);
 				$this->SetStatus(201);
-				$this->SetValue("getWFS", 0);
+				if (@$this->GetIDForIdent('getWFS'))
+				{
+					$this->SetValue("getWFS", 0);
+				}
 				return false;
 			}
 			else
