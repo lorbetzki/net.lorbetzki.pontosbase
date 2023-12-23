@@ -101,7 +101,9 @@
             "ALARM TEMPERATURE SENSOR ERROR":"ALARM: Temperatursensor fehlerhaft!",
             "ALARM LOW BATTERY":"ALARM: Batterie schwach!",
             "please enter Hostname or IP Address!":"Bitte Hostname oder IP Adresse eingeben!",
-            "Choose Model": "Modellauswahl"
+            "Choose Model": "Modellauswahl",
+            "Disable errormessage if Wifi Connection lost.":"deaktiviere Fehlermeldungen bei Wifi Verbindungsverlust.",
+            "miscellaneous":"verschiedenes"
         }     
     }
 }

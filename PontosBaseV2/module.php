@@ -84,6 +84,8 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			$this->RegisterPropertyInteger('getTMPSW', 0);
 			$this->RegisterPropertyBoolean('getTMPSWbool', false);
 
+			$this->RegisterPropertyBoolean('DisWifiError', false);
+			
 			//update all Data
 			$this->RegisterTimer('PB_UpdateData', 0, 'PB_UpdateData($_IPS[\'TARGET\']);');
 			// internal Timer for Clear Alarm
@@ -355,7 +357,6 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			if ($this->CheckConnection() == true) 
 			{
 
-				//$this->LogMessage($this->Translate('update data'), KL_MESSAGE);
 				$this->SendDebug(__FUNCTION__,'update data', 0);
 
 				$DataAll = $this->GetData();
@@ -363,7 +364,6 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 				$DataSLP = $this->GetData("SLP"); // Self learning program
 
 				if (!is_array($DataAll) || !is_array($DataCND) || !is_array($DataSLP)) {
-					//$this->LogMessage($this->Translate('problems to get data, data is not an array, try again later'), KL_ERROR);
 					$this->SendDebug(__FUNCTION__,'problems to get data, data is not an array, try again later', 0);
 					
 					exit; 
@@ -493,7 +493,6 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 			$Modell				= $this->ReadPropertyString('Modell');
 			$uri       			= 'http://'.$ipaddress.':5333/'.$Modell.'/get/WFS';
 			
-			//$this->LogMessage($this->Translate('CheckConnection(): Check Wifi Connection: '), KL_MESSAGE);
 			$this->SendDebug(__FUNCTION__, 'CheckConnection(): Check Wifi Connection: ', 0);
 
 			$ch = curl_init();
@@ -511,8 +510,11 @@ require_once __DIR__ . '/../libs/VariableProfileHelper.php';
 
 			if (empty($response) || $response === false || !empty($curl_error)) {
 				$this->SendDebug(__FUNCTION__, 'CheckConnection(): no response from device, wrong IP Address or device out of range!' . $curl_error, 0);
-				$this->LogMessage($this->Translate('CheckConnection(): no response from device, wrong IP Address or device out of range!'), KL_ERROR);
-				$this->SetStatus(201);
+				if ($this->ReadPropertyBoolean('DisWifiError') === false)
+					{
+						$this->LogMessage($this->Translate('CheckConnection(): no response from device, wrong IP Address or device out of range!'), KL_ERROR);
+					}
+						$this->SetStatus(201);
 				if (@$this->GetIDForIdent('getWFS'))
 				{
 					$this->SetValue("getWFS", 0);

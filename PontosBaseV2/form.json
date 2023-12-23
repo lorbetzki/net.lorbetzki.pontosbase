@@ -186,6 +186,16 @@
                     "type": "CheckBox",
                     "caption": "set temporary deactivation for leakage detection time in sec.",
                     "name": "getTMPSWbool"
+                },
+                { 
+                    "type": "Label",
+                    "caption": "miscellaneous",
+                    "name": "miscellaneous"
+                },
+                {
+                    "type": "CheckBox",
+                    "caption": "Disable errormessage if Wifi Connection lost.",
+                    "name": "DisWifiError"
                 }    
             ]
         },
